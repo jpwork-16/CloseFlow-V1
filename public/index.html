@@ -1,1 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CloseFlow — Revenue Command Center</title>
 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Logic-first revenue execution system for business coaches" />
+
+  <link rel="stylesheet" href="./styles/main.css" />
+</head>
+<body>
+
+  <!-- =========================
+       APP SHELL
+       ========================= -->
+
+  <header>
+    <h1>CloseFlow</h1>
+    <nav>
+      <button data-route="today">Today</button>
+      <button data-route="pipeline">Pipeline</button>
+      <button data-route="review">Weekly Review</button>
+    </nav>
+  </header>
+
+  <main id="app">
+    <p>Loading CloseFlow…</p>
+  </main>
+
+  <!-- =========================
+       APP ENTRY POINT
+       ========================= -->
+
+  <script type="module">
+    import router from "../src/app/router.js";
+
+    // Boot the application
+    router.init();
+  </script>
+
+</body>
+</html>
