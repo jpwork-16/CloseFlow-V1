@@ -1,28 +1,27 @@
 /**
- * ProspectCard
- * ------------
+ * ProspectCard (FINAL)
+ * --------------------
  * Responsibility:
- * - Render a single prospect in a consistent, reusable format
+ * - Render a single prospect
+ * - Provide ONE execution trigger
+ *
+ * This is the moment where:
+ * UI → Action → Memory → Feedback → Pressure → Money
  *
  * This component:
- * - Receives ONE prospect object
- * - Returns HTML only
+ * - Renders data
+ * - Triggers executeAction
  *
  * This component NEVER:
- * - Fetches data
- * - Calculates scores
- * - Applies business rules
+ * - Calculates logic
+ * - Touches repositories directly
  */
+
+import executeAction from "../actions/executeAction.js";
 
 class ProspectCard {
   render(prospect, index = null) {
     if (!prospect) return "";
-
-    const flagsHtml = prospect.enforcement
-      ? prospect.enforcement.flags
-          .map(flag => this._renderFlag(flag))
-          .join("")
-      : "";
 
     return `
       <div class="card">
@@ -47,26 +46,48 @@ class ProspectCard {
           Idle: ${prospect.daysIdle ?? 0} days
         </p>
 
-        ${flagsHtml ? `<div>${flagsHtml}</div>` : ""}
+        <button
+          class="execute-btn"
+          data-execute
+          data-prospect-id="${prospect.id}"
+        >
+          ✅ Mark as Executed
+        </button>
       </div>
     `;
   }
 
-  /* =========================
-     INTERNAL HELPERS
-     ========================= */
+  /**
+   * Bind execution handler safely
+   * Called AFTER HTML is injected into DOM
+   */
+  bindEvents(rootElement) {
+    const buttons = rootElement.querySelectorAll("[data-execute]");
 
-  _renderFlag(flag) {
-    let className = "flag-highlight";
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        const prospectId = button.getAttribute("data-prospect-id");
 
-    if (flag.level === "WARNING") className = "flag-warning";
-    if (flag.level === "CRITICAL") className = "flag-critical";
+        try {
+          executeAction({
+            prospectId,
+            actionType: "follow_up",
+            meta: {
+              preventedLoss: true,
+              recovered: true
+            }
+          });
 
-    return `
-      <span class="${className}">
-        ⚠ ${flag.message}
-      </span><br/>
-    `;
+          // Optional immediate UI feedback
+          button.textContent = "✔ Executed";
+          button.disabled = true;
+
+        } catch (err) {
+          console.error("Execution failed:", err);
+          alert("Failed to record execution.");
+        }
+      });
+    });
   }
 
   _formatStage(stage) {
@@ -75,4 +96,3 @@ class ProspectCard {
 }
 
 export default ProspectCard;
-
