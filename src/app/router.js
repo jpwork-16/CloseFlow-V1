@@ -2,65 +2,54 @@
  * Router
  * ------
  * Responsibility:
- * - Handle simple view switching
- * - Decide WHICH page is active
+ * - Control view switching
+ * - Bridge navigation → UI rendering
  *
- * This router is intentionally minimal.
- * No frameworks. No magic.
+ * This router:
+ * - Boots the app
+ * - Calls UIController explicitly
+ *
+ * UI never decides routing.
  */
 
 import app from "./app.js";
 import appState from "./state.js";
+import uiController from "../ui/uiController.js";
 
 class Router {
   init() {
-    // Initial app boot
+    // Boot core application
     app.init();
 
     // Default route
     this.navigate("today");
 
-    // Attach nav listeners (if UI exists)
+    // Bind navigation events
     this._bindNavigation();
   }
 
   navigate(route) {
     switch (route) {
       case "today":
-        this._renderToday();
+        appState.loadToday();
+        uiController.renderToday();
         break;
 
       case "pipeline":
-        this._renderPipeline();
+        appState.loadPipeline();
+        uiController.renderPipeline();
         break;
 
       case "review":
-        this._renderReview();
+        appState.loadWeeklyReview();
+        uiController.renderReview();
         break;
 
       default:
         console.warn(`Unknown route: ${route}`);
-        this._renderToday();
+        appState.loadToday();
+        uiController.renderToday();
     }
-  }
-
-  /* =========================
-     RENDER HANDLERS
-     ========================= */
-
-  _renderToday() {
-    const data = appState.getToday();
-    console.log("ROUTE → TODAY", data);
-  }
-
-  _renderPipeline() {
-    const data = appState.getPipeline();
-    console.log("ROUTE → PIPELINE", data);
-  }
-
-  _renderReview() {
-    const data = appState.getWeeklyReview();
-    console.log("ROUTE → REVIEW", data);
   }
 
   /* =========================
