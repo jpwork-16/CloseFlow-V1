@@ -1,1 +1,24 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "description": "User-configurable settings for CloseFlow"
+  },
+
+  "execution": {
+    "trackStreaks": true,
+    "enableRecoveryRewards": true,
+    "enableShameLoop": true
+  },
+
+  "thresholds": {
+    "highlightIdleDays": 3,
+    "warningIdleDays": 5,
+    "criticalIdleDays": 7
+  },
+
+  "ui": {
+    "showExecutionButton": true,
+    "showMoneyImpact": true
+  }
+}
 
