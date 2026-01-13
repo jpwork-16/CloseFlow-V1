@@ -1,1 +1,95 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "lastUpdated": "2026-01-13",
+    "description": "All active and historical prospects tracked by CloseFlow"
+  },
+
+  "prospects": [
+    {
+      "id": "p_001",
+      "name": "John Smith",
+      "platform": "Instagram",
+      "offer": "High-Ticket Business Coaching",
+      "stage": "warm",
+      "dealValue": 5000,
+      "urgency": 8,
+      "lastContact": "2026-01-10",
+      "nextAction": "Send case study",
+      "daysIdle": 3,
+      "status": "active",
+      "history": [
+        {
+          "date": "2026-01-08",
+          "action": "Initial conversation started"
+        },
+        {
+          "date": "2026-01-10",
+          "action": "Qualified as warm lead"
+        }
+      ]
+    },
+    {
+      "id": "p_002",
+      "name": "Alex Brown",
+      "platform": "Twitter",
+      "offer": "1:1 Scaling Mentorship",
+      "stage": "offer_sent",
+      "dealValue": 10000,
+      "urgency": 9,
+      "lastContact": "2026-01-07",
+      "nextAction": "Follow up on offer decision",
+      "daysIdle": 6,
+      "status": "active",
+      "history": [
+        {
+          "date": "2026-01-05",
+          "action": "Discovery call completed"
+        },
+        {
+          "date": "2026-01-07",
+          "action": "Offer sent"
+        }
+      ]
+    },
+    {
+      "id": "p_003",
+      "name": "Sarah Lee",
+      "platform": "LinkedIn",
+      "offer": "Group Coaching Program",
+      "stage": "conversation",
+      "dealValue": 3000,
+      "urgency": 6,
+      "lastContact": "2026-01-12",
+      "nextAction": "Clarify objection",
+      "daysIdle": 1,
+      "status": "active",
+      "history": [
+        {
+          "date": "2026-01-12",
+          "action": "Objection raised on pricing"
+        }
+      ]
+    },
+    {
+      "id": "p_004",
+      "name": "Michael Chen",
+      "platform": "Instagram",
+      "offer": "High-Ticket Business Coaching",
+      "stage": "lost",
+      "dealValue": 7000,
+      "urgency": 0,
+      "lastContact": "2025-12-20",
+      "nextAction": null,
+      "daysIdle": 24,
+      "status": "inactive",
+      "history": [
+        {
+          "date": "2025-12-18",
+          "action": "Offer rejected"
+        }
+      ]
+    }
+  ]
+}
 
