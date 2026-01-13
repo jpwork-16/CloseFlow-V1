@@ -1,0 +1,89 @@
+{
+  "version": "1.0.0",
+
+  "scoring": {
+    "baseScore": 100,
+
+    "weights": {
+      "dealValue": 0.35,
+      "urgency": 0.30,
+      "recency": 0.20,
+      "stage": 0.15
+    },
+
+    "recency": {
+      "maxIdleDays": 14,
+      "penaltyPerDay": 3
+    },
+
+    "stageMultipliers": {
+      "new": 0.8,
+      "conversation": 1.0,
+      "warm": 1.3,
+      "offer_sent": 1.6,
+      "closed": 0.0,
+      "lost": 0.0
+    }
+  },
+
+  "enforcement": {
+    "idleThresholds": {
+      "highlight": 3,
+      "warning": 5,
+      "critical": 7
+    },
+
+    "rules": {
+      "offerSentIdleLimit": 2,
+      "warmLeadIdleLimit": 3,
+      "conversationIdleLimit": 5
+    }
+  },
+
+  "todayView": {
+    "maxItems": 5,
+    "criticalAlwaysIncluded": true,
+    "sortOrder": [
+      "critical",
+      "score_desc"
+    ]
+  },
+
+  "pipeline": {
+    "stages": [
+      "new",
+      "conversation",
+      "warm",
+      "offer_sent",
+      "closed",
+      "lost"
+    ]
+  },
+
+  "review": {
+    "weekly": {
+      "missedFollowUpsWeight": 0.4,
+      "avgIdleWeight": 0.2,
+      "conversionWeight": 0.2,
+      "lostDealsWeight": 0.2
+    }
+  },
+
+  "tiers": {
+    "solo": {
+      "scoringEnabled": true,
+      "enforcementLevel": "basic",
+      "weeklyReview": false
+    },
+    "pro": {
+      "scoringEnabled": true,
+      "enforcementLevel": "strict",
+      "weeklyReview": true
+    },
+    "executive": {
+      "scoringEnabled": true,
+      "enforcementLevel": "aggressive",
+      "weeklyReview": true
+    }
+  }
+}
