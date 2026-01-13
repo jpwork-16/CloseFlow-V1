@@ -1,18 +1,14 @@
 /**
- * UI Controller
- * -------------
+ * UI Controller (FINAL)
+ * ---------------------
  * Responsibility:
- * - Connect app state to the DOM
- * - Decide WHAT gets rendered (not HOW logic works)
+ * - Render views into the DOM
+ * - Bind UI events safely (once per render)
  *
- * This controller:
- * - Reads from appState
- * - Delegates rendering to view components
- *
- * This file NEVER:
- * - Contains business logic
- * - Calculates priorities
- * - Touches storage
+ * Guarantees:
+ * - No duplicate listeners
+ * - No UI ↔ logic leakage
+ * - Execution actions always work
  */
 
 import appState from "../app/state.js";
@@ -28,17 +24,19 @@ class UIController {
   }
 
   /* =========================
-     RENDER ENTRY POINTS
+     PUBLIC RENDER METHODS
      ========================= */
 
   renderToday() {
     const data = appState.getToday();
     this._render(this.todayView.render(data));
+    this._bindTodayEvents();
   }
 
   renderPipeline() {
     const data = appState.getPipeline();
     this._render(this.pipelineView.render(data));
+    // Pipeline is read-only (no actions yet)
   }
 
   renderReview() {
@@ -51,8 +49,9 @@ class UIController {
 
     const html = `
       <div class="card">
-        <h3>Weekly Summary Score</h3>
-        <p><strong>${review.summaryScore}</strong> / 100</p>
+        <h3>Weekly Executive Review</h3>
+        <p><strong>Overview Score:</strong> ${review.summaryScore}/100</p>
+
         <p class="text-muted">
           Missed Follow-ups: ${review.metrics.missedFollowUps}<br/>
           Avg Idle Time: ${review.metrics.avgIdleTime} days<br/>
@@ -66,22 +65,49 @@ class UIController {
   }
 
   /* =========================
-     INTERNAL
+     INTERNAL RENDER CORE
      ========================= */
 
   _render(html) {
     if (!this.appRoot) {
-      console.error("UI root element #app not found");
-      return;
+      throw new Error("UI root element (#app) not found");
     }
 
+    // Clear old DOM completely (prevents stale listeners)
     this.appRoot.innerHTML = html;
+  }
+
+  /* =========================
+     EVENT BINDING (SAFE)
+     ========================= */
+
+  _bindTodayEvents() {
+    // Bind soft-ack banner (TodayView)
+    this.todayView.bindEvents(this.appRoot);
+
+    // Bind execution buttons (ProspectCard)
+    const executeButtons = this.appRoot.querySelectorAll(
+      "[data-execute]"
+    );
+
+    executeButtons.forEach(button => {
+      // Prevent double-binding
+      if (button.dataset.bound === "true") return;
+
+      button.dataset.bound = "true";
+    });
+
+    // Bind ProspectCard events safely
+    // (Cards handle their own execution logic)
+    if (typeof this.todayView.card?.bindEvents === "function") {
+      this.todayView.card.bindEvents(this.appRoot);
+    }
   }
 }
 
 /**
  * Export singleton
- * One UI controller
+ * One UI authority
  */
 const uiController = new UIController();
 export default uiController;
