@@ -1,1 +1,102 @@
+/* =========================
+   RESET & BASE
+   ========================= */
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+               sans-serif;
+  background-color: #0f1115;
+  color: #e6e6e6;
+  height: 100%;
+}
+
+/* =========================
+   LAYOUT
+   ========================= */
+
+header {
+  padding: 16px 24px;
+  background-color: #151821;
+  border-bottom: 1px solid #22263a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header h1 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+nav button {
+  background: transparent;
+  border: 1px solid #2c3150;
+  color: #e6e6e6;
+  padding: 8px 14px;
+  margin-left: 8px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+nav button:hover {
+  background-color: #1d2140;
+}
+
+main {
+  padding: 24px;
+}
+
+/* =========================
+   STATES & UTILITIES
+   ========================= */
+
+.hidden {
+  display: none;
+}
+
+.text-muted {
+  color: #9aa0c7;
+}
+
+/* =========================
+   FUTURE CONTENT PLACEHOLDERS
+   ========================= */
+
+.card {
+  background-color: #151821;
+  border: 1px solid #22263a;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.card h3 {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.card p {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.flag-critical {
+  color: #ff5f5f;
+}
+
+.flag-warning {
+  color: #ffb347;
+}
+
+.flag-highlight {
+  color: #4fd1c5;
+}
