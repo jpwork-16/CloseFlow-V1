@@ -1,5 +1,5 @@
 /* =========================
-   RESET & BASE
+   BASE
    ========================= */
 
 * {
@@ -10,27 +10,9 @@
 
 html, body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-               Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-               sans-serif;
+               Roboto, Ubuntu, sans-serif;
   background-color: #0f1115;
   color: #e6e6e6;
-  height: 100%;
-}
-
-/* =========================
-   LAYOUT
-   ========================= */
-
-header {
-  padding: 16px 24px;
-  background-color: #151821;
-  border-bottom: 1px solid #22263a;
-  display: flex;
-  justify-content: space-between;
-}
-
-main {
-  padding: 24px;
 }
 
 /* =========================
@@ -62,23 +44,53 @@ main {
   border: 1px solid #ff5f5f;
 }
 
-.ack-btn {
-  margin-top: 10px;
-  padding: 6px 12px;
-  background: #151821;
-  color: #fff;
-  border: 1px solid #ff5f5f;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
 /* =========================
    SOFT LOCK
    ========================= */
 
 .dimmed {
   opacity: 0.35;
-  pointer-events: auto; /* IMPORTANT: still usable */
+}
+
+/* =========================
+   TIME DECAY (OPTION 4)
+   ========================= */
+
+.decay-low {
+  border-left: 4px solid #4fd1c5;
+}
+
+.decay-medium {
+  border-left: 4px solid #ffb347;
+}
+
+.decay-high {
+  border-left: 4px solid #ff5f5f;
+}
+
+/* =========================
+   TAGS (OPTIONS 3,5,6)
+   ========================= */
+
+.shame-tag {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #ffb347;
+  font-style: italic;
+}
+
+.streak-tag {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #4fd1c5;
+  font-weight: 600;
+}
+
+.recovery-tag {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #7CFF7C;
+  font-weight: 600;
 }
 
 /* =========================
@@ -100,4 +112,18 @@ main {
 
 .text-muted {
   color: #9aa0c7;
+}
+
+/* =========================
+   BUTTON
+   ========================= */
+
+.ack-btn {
+  margin-top: 10px;
+  padding: 6px 12px;
+  background: #151821;
+  color: #fff;
+  border: 1px solid #ff5f5f;
+  border-radius: 6px;
+  cursor: pointer;
 }
