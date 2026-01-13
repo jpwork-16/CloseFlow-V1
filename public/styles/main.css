@@ -30,12 +30,6 @@ header {
   justify-content: space-between;
 }
 
-header h1 {
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
 nav button {
   background: transparent;
   border: 1px solid #2c3150;
@@ -44,7 +38,6 @@ nav button {
   margin-left: 8px;
   cursor: pointer;
   border-radius: 6px;
-  font-size: 14px;
 }
 
 nav button:hover {
@@ -56,19 +49,7 @@ main {
 }
 
 /* =========================
-   STATES & UTILITIES
-   ========================= */
-
-.hidden {
-  display: none;
-}
-
-.text-muted {
-  color: #9aa0c7;
-}
-
-/* =========================
-   FUTURE CONTENT PLACEHOLDERS
+   CARDS
    ========================= */
 
 .card {
@@ -79,18 +60,36 @@ main {
   margin-bottom: 12px;
 }
 
-.card h3 {
-  font-size: 16px;
-  margin-bottom: 6px;
+/* =========================
+   ENFORCEMENT ESCALATION
+   ========================= */
+
+.critical-banner {
+  background: linear-gradient(90deg, #7a1c1c, #b83232);
+  border: 1px solid #ff5f5f;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  animation: pulse 1.5s infinite;
 }
 
-.card p {
-  font-size: 14px;
-  line-height: 1.4;
+.critical-card {
+  border: 1px solid #ff5f5f;
+  animation: pulse 1.5s infinite;
 }
+
+.alert-stack {
+  margin-bottom: 12px;
+}
+
+/* =========================
+   FLAGS
+   ========================= */
 
 .flag-critical {
   color: #ff5f5f;
+  font-weight: 600;
 }
 
 .flag-warning {
@@ -99,4 +98,28 @@ main {
 
 .flag-highlight {
   color: #4fd1c5;
+}
+
+/* =========================
+   UTILITIES
+   ========================= */
+
+.text-muted {
+  color: #9aa0c7;
+}
+
+/* =========================
+   ANIMATIONS
+   ========================= */
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 95, 95, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 95, 95, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 95, 95, 0);
+  }
 }
